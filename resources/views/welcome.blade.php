@@ -74,7 +74,7 @@
                     <!-- Left-aligned Navigation Links -->
                     <nav class="left-section flex space-x-4">
                         <a href="#section1" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20]">
-                            Home
+                            Dashboard
                         </a>
                         <a href="#section3" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                             News
