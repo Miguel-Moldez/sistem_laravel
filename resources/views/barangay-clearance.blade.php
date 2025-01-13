@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>802-GO: Barangay 802 Management System</title>
-
-        <!-- Fonts -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Indigency Certificate</title>
+    @vite('resources/css/app.css')
+    <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -56,9 +55,6 @@
             .right-section {
                 justify-self: end; /* Aligns to the right */
             }
-            .banner-overlay {
-                background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-            }
             .barangay-section {
                 width: 100%; /* Ensures full-width spanning */
                 padding-top: 2rem; /* Add space at the top */
@@ -83,141 +79,78 @@
                 font-size: 0.875rem;
                 color: #e0e0e0; /* Slightly lighter color for contrast */
             }
-            #map {
-                height: 380px;
-                width: 100%;
-            }
-            .custom-popup {
-                max-width: 250px;
-                font-family: Arial, sans-serif;
-            }
-            .custom-popup img {
-                width: 100%;
-                border-radius: 8px;
-                margin-bottom: 8px;
-            }
-            .custom-popup h4 {
-                margin: 0;
-                font-size: 16px;
-                font-weight: bold;
-            }
-            .custom-popup p {
-                margin: 8px 0;
-                font-size: 14px;
-            }
-            .custom-popup a {
-                display: inline-block;
-                margin-top: 8px;
-                color: #11468F;
-                text-decoration: underline;
-            }
-            .back-to-top {
-                position: fixed;
-                bottom: 20px;
-                right: 20px; /* Adjusted to the right side */
-                padding: 10px 20px;
-                font-size: 14px;
-                background-color: #11468F;
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-                z-index: 1000;
-                transition: background-color 0.3s ease;
-            }
-            .back-to-top:hover {
-                background-color: #092d5a;
-            }
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-                background-color: #f9f9f9;
-                color: #333;
-            }
-            .container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                max-width: 1200px;
-                margin: 50px auto;
-                gap: 20px;
-            }
-            .text-section {
-                background-image: url("{{ asset('background/header_brgy.png') }}"); /* Replace with the path to your background image */
-                background-size: cover; /* Ensures the image covers the entire section */
-        background-position: center; /* Centers the image */
-        background-repeat: no-repeat; /* Prevents the image from repeating */
-        width: 100%; /* Makes the section span the full width of the viewport */
-        max-width: 1920px; /* Ensures it doesn't exceed the image's width */
-        height: auto; /* Automatically adjusts height based on the image's aspect ratio */
-        aspect-ratio: 1920 / 500; /* Ensures the aspect ratio is maintained */
-        display: flex; /* Enables flexbox for centering */
-        flex-direction: column; /* Stacks text vertically */
-        justify-content: center; /* Vertically centers content */
-        align-items: center; /* Horizontally centers content */
-        color: white; /* Makes the text visible on the image */
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); /* Improves text readability */
-        font-weight: bold; /* Makes the font bolder */
-        
-        margin: 0 auto; /* Centers the section horizontally */
-            }
-            h1 {
-                color: #9dc0f1;
-                font-size: 3em;
-                font-weight: bold;
-            }
-            p {
-                margin: 10px 0 30px;
-                font-size: 1.2em;
-            }
-            .service {
-                background: #fff;
-                padding: 20px;
-                border: 1px solid transparent;
-                border-radius: 10px;
-                width: 30%;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                height: 250px;
-                transition: border-color 0.3s, box-shadow 0.3s;
-            }
-            .service:hover {
-                border-color: #11468F;
-                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            }
-            .service h3 {
-                color: #11468F;
-                font-size: 1.4em;
-                margin-bottom: 10px;
-            }
-            .service p {
-                margin-bottom: 15px;
-                font-size: 1em;
-                flex-grow: 1;
-            }
-            .service a {
-                display: inline-block;
-                text-decoration: none;
-                background-color: #11468F;
-                color: #fff;
-                padding: 10px 20px;
-                font-size: 1em;
-                border-radius: 5px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transition: background-color 0.3s;
-                margin-top: 15px;
-            }
-            .service a:hover {
-                background-color: #0d3570;
-            }
-        </style>
-    </head>
-    <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            overflow-y: auto;
+        }
+
+        .form-container h1 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #1E40AF; /* Updated blue color */
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-container label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1E40AF; /* Updated blue color */
+        }
+
+        .form-container input,
+        .form-container textarea {
+            margin-top: 0.25rem;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            box-sizing: border-box;
+        }
+
+        .form-container input:focus,
+        .form-container textarea:focus {
+            border-color: #1E40AF; /* Updated blue border on focus */
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.3); /* Soft blue glow */
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.375rem;
+            background-color: #1E40AF; /* Updated blue color */
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #1E3A8A; /* Slightly darker blue for hover */
+        }
+
+        .form-container .g-recaptcha {
+            margin: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50 relative">
             <img id="background" class="absolute inset-0 w-full h-full object-cover" src="{{ asset('') }}" alt="Background" />
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
@@ -225,7 +158,7 @@
                 <header class="header-grid">
                     <!-- Left-aligned Navigation Links -->
                     <nav class="left-section flex space-x-4">
-                        <a href="{{ route('welcome') }}" class="rounded-md px-3 py-2 text-white bg-[#FF2D20] ring-1 ring-transparent transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20] active">
+                        <a href="{{ route('welcome') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20]">
                             Home
                         </a>
                         <a href="{{ route('news') }}" class="rounded-md px-3 py-2 text-white ring-1 ring-transparent transition hover:text-white/70 focus:outline-none focus-visible:ring-[#FF2D20]">
@@ -263,154 +196,48 @@
                 @endif
             </header>
 
+<body>
+    <div class="form-container">
+        
+        <h1>Barangay Clearance</h1>
 
-<div class="text-section">
-        <h1>802-GO: Barangay Management System</h1>
-        <p>District 5, Sta. Ana Manila City, Metro Manila, Philippines</p>
+        <form action="{{ route('submit-barangay-clearance') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <label for="purpose">Purpose of Request</label>
+            <input id="purpose" name="purpose" type="text" required>
+
+            <label for="full_name">Full Name</label>
+            <input id="full_name" name="full_name" type="text" required>
+
+            <label for="dob">Date of Birth</label>
+            <input id="dob" name="dob" type="date" required>
+
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="contact_number">Contact Number</label>
+            <input id="contact_number" name="contact_number" type="text" required>
+
+            <label for="valid_id">Valid ID (Upload)</label>
+            <input id="valid_id" type="file" name="valid_id" accept="image/*" required>
+
+            <label for="proof_of_residency">Proof of Residency (Upload)</label>
+            <input id="proof_of_residency" type="file" name="proof_of_residency" accept="image/*,application/pdf" required>
+
+            <label for="recent_photo">Recent Photo (Upload)</label>
+            <input id="recent_photo" type="file" name="recent_photo" accept="image/*" required>
+
+            <label for="signature">Signature (Upload)</label>
+            <input id="signature" type="file" name="signature" accept="image/*,application/pdf" required>
+
+            <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+       
     </div>
-
-    <div class="container">
-        <div class="service">
-            <h3>Barangay Clearance</h3>
-            <p>A general document certifying that you are a resident of the barangay.</p>
-            <a href="">Click to Apply</a>
-        </div>
-
-        <div class="service">
-            <h3>Certificate of Residency</h3>
-            <p>This document proves that you are currently residing in the barangay.</p>
-            <a href=" }}">Click to Apply</a>
-        </div>
-
-        <div class="service">
-            <h3>Indigency Certificate</h3>
-            <p>This document certifies that you are indigent or belong to a low-income household.</p>
-            <a href="">Click to Apply</a>
-        </div>
-    </div>
-
-
-<!-- News Title Section -->
-<section class="flex justify-center p-6">
-    <!-- Main Banner Card with "Latest News" Title -->
-    <div
-        style=" width: 100%; max-width: var(--max-screen-xl); display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 0.5rem; background-color: white; padding: 1.5rem; box-shadow: 0px 14px 34px 0px rgba(0, 0, 0, 0.08); border: 2px solid rgba(255, 255, 255, 0.05); transition: border-color 0.3s, border-width 0.3s;" 
-        onmouseover="this.style.borderColor='#11468F'; this.style.borderWidth='4px';" 
-        onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.borderWidth='2px';"
-    >
-        <h1 style="font-size: 30px; font-weight: bold;" class="text-8xl font-extrabold text-black dark:text-white">Barangay News</h1>
-    </div>
-</section>
-
-
-<!-- News Articles Section -->
-<section class="grid gap-6 lg:grid-cols-3 lg:gap-8 p-6">
-    <!-- News Article Card 1 -->
-    <a href="#article1" class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-        <div class="relative flex w-full items-stretch">
-            <img src="{{ asset('background/news-1.png') }}" alt="News Image 1" class="aspect-video w-full h-full object-cover rounded-[10px] drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden">
-            <div class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"></div>
-        </div>
-        <div class="relative">
-            <h2 class="text-xl font-semibold text-black dark:text-white">Community Health Outreach Brings Medical Assistance to Families</h2>
-            <p class="mt-4 text-sm/relaxed">Health workers provide free check-ups and medical assistance to families in underserved areas, focusing on young children and elderly residents.</p>
-        </div>
-    </a>
-
-    <!-- News Article Card 2 -->
-    <a href="#article2" class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-        <div class="relative flex w-full items-stretch">
-            <img src="{{ asset('background/news-2.png') }}" alt="News Image 2" class="aspect-video w-full h-full object-cover rounded-[10px] drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden">
-            <div class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"></div>
-        </div>
-        <div class="relative">
-            <h2 class="text-xl font-semibold text-black dark:text-white">Storytelling Session Inspires Young Minds in Local Outreach Program</h2>
-            <p class="mt-4 text-sm/relaxed">Volunteers engage children in an educational storytelling session, aiming to foster a love for reading and learning in a friendly outdoor setting.</p>
-        </div>
-    </a>
-
-    <!-- News Article Card 3 -->
-    <a href="#article3" class="flex flex-col items-start gap-6 overflow-hidden rounded-lg bg-white p-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]">
-        <div class="relative flex w-full items-stretch">
-            <img src="{{ asset('background/news-3.png') }}" alt="News Image 3" class="aspect-video w-full h-full object-cover rounded-[10px] drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)] dark:hidden">
-            <div class="absolute -bottom-16 -left-16 h-40 w-[calc(100%+8rem)] bg-gradient-to-b from-transparent via-white to-white dark:via-zinc-900 dark:to-zinc-900"></div>
-        </div>
-        <div class="relative">
-            <h2 class="text-xl font-semibold text-black dark:text-white">Community Effort Enhances Road Safety with New Repairs </h2>
-            <p class="mt-4 text-sm/relaxed">Local workers join forces to repair and improve road infrastructure, enhancing safety for pedestrians and drivers in the community.</p>
-        </div>
-    </a>
-</section>
-
-
-<!-- About us Section -->
-<section class="flex justify-center py-10 px-6">
-    <!-- About Us Card centered on the screen -->
-    <div
-        class="w-full max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden rounded-lg bg-white pt-16 pb-16 px-6 shadow-[0px_14px_34px_0px_rgba(0,0,0,0.08)] ring-1 ring-white/[0.05] transition duration-300 hover:text-black/70 hover:ring-black/20 focus:outline-none focus-visible:ring-[#FF2D20] lg:p-10 lg:pb-10 dark:bg-zinc-900 dark:ring-zinc-800 dark:hover:text-white/70 dark:hover:ring-zinc-700 dark:focus-visible:ring-[#FF2D20]"
-    >
-        <!-- About Us Content -->
-        <div class="flex flex-col gap-6 justify-center text-center lg:text-left">
-            <h2 style="font-size: 35px; font-weight: bold;" class="text-2xl font-semibold text-black dark:text-white">About Us</h2>
-            <p style="font-size: 16px;" class="text-sm/relaxed text-gray-700 dark:text-gray-300">
-            Barangay 802, District 5, Sta. Ana, Manila City, Metro Manila, Philippines, is a peaceful, progressive, and highly-urbanized community. It consists of cooperative and morally upright residents, ambitious and responsive business owners and corporate managers, and committed and visionary leaders. Barangay 802 works hand in hand with its constituents to sustain a clean, green, safe, and healthy environment, fostering both physical and economic growth.
-            </p>
-            <a href="#"
-               class="mt-4 inline-block px-6 py-3 bg-green-500 text-white font-semibold rounded-md transition hover:bg-green-600">
-                Read More
-            </a>
-        </div>
-
-        <!-- About Us Image -->
-        <div class="relative flex items-center">
-            <img
-                src="{{ asset('background/brgy.jpg') }}"
-                alt="Barangay 802 Officials"
-                class="w-full h-full object-cover rounded-[10px] drop-shadow-[0px_4px_34px_rgba(0,0,0,0.06)]"
-            />
-            <div class="absolute inset-0 banner-overlay"></div>
-        </div>
-    </div>
-</section>
-
-<!-- Map Section -->
-<section class="flex justify-center py-5 ">
-    <div id="map"></div>
-    <!-- Back to Top Button -->
-    <button class="back-to-top" onclick="scrollToTop()">Back to Top</button>
-    <script>
-    // Initialize the map
-    const map = L.map('map').setView([14.572701489536044, 121.00241131326865], 100); // Latitude, Longitude, Zoom Level
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add a marker with a custom popup
-    const popupContent = `
-      <div class="custom-popup">
-        <img src="{{ asset('images/map_brgy.jpg') }}" alt="Location Photo">
-        <h4>Barangay 802</h4>
-        <p>District 5, Sta. Ana Manila City, Metro Manila, Philippines</p>
-        <a href="https://www.google.com/maps/place/Barangay+802+Zone+87+District+V+Manila/@14.57304,120.9936437,16z/data=!4m10!1m2!2m1!1sBrgy.+802+District+5,+Sta.+Ana+Manila+City,+Metro+Manila,+Philippines!3m6!1s0x3397c99ba4d6d167:0x9ee46b591523041a!8m2!3d14.57304!4d121.0026559!15sCkVCcmd5LiA4MDIgRGlzdHJpY3QgNSwgU3RhLiBBbmEgTWFuaWxhIENpdHksIE1ldHJvIE1hbmlsYSwgUGhpbGlwcGluZXOSARpkaXN0cmljdF9nb3Zlcm5tZW50X29mZmljZeABAA!16s%2Fg%2F11bwny0638?entry=ttu&g_ep=EgoyMDI1MDEwOC4wIKXMDSoASAFQAw%3D%3D" target="_blank">Directions</a>
-      </div>
-    `;
-
-    L.marker([14.572701489536044, 121.00241131326865]).addTo(map)
-      .bindPopup(popupContent);
-    // Scroll to Top Function
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  </script>
-</section>
-
-<!-- Barangay Section -->
-<section class="barangay-section bg-[#11468F] text-white py-12 px-6">
+    <!-- Barangay Section -->
+    <section class="barangay-section bg-[#11468F] text-white py-12 px-6">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <!-- Left Column: Logo and Name with Centered Alignment -->
         <div class="flex items-center justify-center lg:justify-start gap-4">
@@ -449,8 +276,5 @@
     <p style="margin: 0; font-size: 12px;">Designed by SISTEM</p>
 </footer>
 
-                </div>
-            </div>
-        </div>
-    </body>
+</body>
 </html>
